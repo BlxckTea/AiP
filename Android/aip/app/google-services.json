@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "650055349723",
+    "firebase_url": "https://aip-rpi.firebaseio.com",
+    "project_id": "aip-rpi",
+    "storage_bucket": "aip-rpi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650055349723:android:9b579f6787cb695d",
+        "android_client_info": {
+          "package_name": "com.aip.pillowbuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650055349723-2a3vn63ieti9o09lctdnpjqnmiclivos.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aip.pillowbuddy",
+            "certificate_hash": "8a2a197d4b2c605ed97c406d94fb7d9513d55ebe"
+          }
+        },
+        {
+          "client_id": "650055349723-4q28c95tf5gisea3er7ktah08iid9dqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHGapApJuyAq6R7IfhsW8B8B1proJqCRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650055349723-q9nlpnv0d8el44qll597a1q1a8vjp97f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
