@@ -4,37 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="40dp"
-    android:background="@drawable/bg_auth">
+    android:background="@color/colorAuthBg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:src="@drawable/logosample"
-        android:scaleType="centerInside"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2.5"
-        android:orientation="vertical"
-        android:gravity="bottom">
+        android:padding="40dp"
+        android:orientation="vertical">
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/signInBtn"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"/>
+        <ImageView
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/and_authimg"
+            android:scaleType="centerInside"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+            android:gravity="bottom" />
     </LinearLayout>
-    <LinearLayout
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/signInBtn"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="vertical"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"/>
 
 </LinearLayout>

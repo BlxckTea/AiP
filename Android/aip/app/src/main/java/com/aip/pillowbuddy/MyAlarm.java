@@ -1,36 +1,63 @@
 package com.aip.pillowbuddy;
 
 public class MyAlarm {
-    private Integer intHour, intMinute;
-    private boolean switchIsOn;
+    private String AP;
+    private Integer hour, minutes;
+    private boolean measureSwitch, safeMs;
 
-    public MyAlarm(Integer intHour, Integer intMinute, boolean switchIsOn) {
-        this.intHour = intHour;
-        this.intMinute = intMinute;
-        this.switchIsOn = switchIsOn;
+
+    public MyAlarm(Integer hour, Integer minutes, boolean safeMs) {
+        if(hour > 12) {
+            this.hour = hour - 12;
+            this.AP = "오후";
+        } else {
+            this.hour = hour;
+            this.AP = "오전";
+        }
+        this.minutes = minutes;
+        this.safeMs = safeMs;
     }
 
-    public Integer getIntHour() {
-        return intHour;
+    public Integer getHour() {
+        return hour;
     }
 
-    public void setIntHour(Integer intHour) {
-        this.intHour = intHour;
+    public void setAP(String AP) {
+        this.AP = AP;
     }
 
-    public Integer getIntMinute() {
-        return intMinute;
+    public String getAP() {
+        return AP;
     }
 
-    public void setIntMinute(Integer intMinute) {
-        this.intMinute = intMinute;
+    public void setHour(Integer hour) {
+        if(hour > 12) this.hour = hour - 12;
+        else this.hour = hour;
+
     }
 
-    public boolean isSwitchIsOn() {
-        return switchIsOn;
+    public Integer getMinutes() {
+        return minutes;
     }
 
-    public void setSwitchIsOn(boolean switchIsOn) {
-        this.switchIsOn = switchIsOn;
+    public void setMinutes(Integer minutes) {
+        this.minutes = minutes;
+    }
+
+    public boolean isMeasureSwitch() {
+        return measureSwitch;
+    }
+
+    public void setMeasureSwitch(boolean measureSwitch) {
+        this.safeMs = measureSwitch;
+        this.measureSwitch = measureSwitch;
+    }
+
+    public boolean isSafeMs() {
+        return safeMs;
+    }
+
+    public void setSafeMs(boolean safeMs) {
+        this.safeMs = safeMs;
     }
 }

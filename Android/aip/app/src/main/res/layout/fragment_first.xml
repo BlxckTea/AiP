@@ -17,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:paddingBottom="50dp">
             <LinearLayout
                 android:id="@+id/linearTvs"
                 android:layout_width="wrap_content"
@@ -25,13 +26,21 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvAmpm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="오전"
+                    android:textColor="#ffffff"
+                    android:textSize="25dp"
+                    android:layout_gravity="right|center_vertical"/>
+                <TextView
                     android:id="@+id/tvHour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="70dp"
+                    android:paddingLeft="20dp"
                     android:text="08"
                     android:textColor="#ffffff"
-                    android:textSize="80dp" />
+                    android:textSize="60dp" />
                 <TextView
                     android:id="@+id/tvColon"
                     android:layout_width="wrap_content"
@@ -45,13 +54,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00"
-                    android:textSize="80dp"
+                    android:textSize="60dp"
                     android:textColor="#ffffff"
                     android:paddingRight="25dp"/>
             </LinearLayout>
 
             <Switch
-                android:id="@+id/switchAlarm"
+                android:id="@+id/switchMeasure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"/>
@@ -89,8 +98,9 @@
             android:id="@+id/tvFoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:textColor="#ffffff"
-            android:paddingLeft="20dp"/>
+            android:paddingLeft="30dp"/>
     </LinearLayout>
 
 </LinearLayout>
