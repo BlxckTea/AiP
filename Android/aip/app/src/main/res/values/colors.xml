@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="colorAuthBg">#293243</color>
+
     <color name="colorMorning">#d6b378</color>
     <color name="colorAfternoon">#528823</color>
     <color name="colorEvening">#3f3e66</color>
