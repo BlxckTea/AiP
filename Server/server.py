@@ -76,7 +76,7 @@ def tonumpy(value):
 		firebase.put('/model','state', final_state)
 
 		#파베에 statelist 붙여나가기
-		statelist = firebase.get(path_state, None) + final_state
+		statelist = firebase.get(path_state, None) + final_state + ","
 		firebase.put(path_state, axislist)
 
 
@@ -85,7 +85,7 @@ def tonumpy(value):
 
 	#파베에 axislist 붙여나가기
 	path_axis = '/model/axislist' + postId
-	axislist = firebase.get(path_axis, None) + axisTen
+	axislist = firebase.get(path_axis, None) + axisTen + ","
 	firebase.put(path_axis, axislist)
 
 
