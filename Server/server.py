@@ -42,6 +42,7 @@ def tonumpy(value):
 	#케라스 모델에 넘기고 return 값 앞뒤에 [] 빼기
 	axisTen = model(value)[1:-1]
 
+	path_state = '/model/statelist' + postId
 	#state 단계 나누기
 	if 0.0 < float(axisTen) < 2.5 :
 		state = "DEEP"
@@ -74,14 +75,18 @@ def tonumpy(value):
 
 		firebase.put('/model','state', final_state)
 
+		#파베에 statelist 붙여나가기
+		statelist = firebase.get(path_state, None) + final_state
+		firebase.put(path_state, axislist)
+
 
 	#파베에 10값 쓰기
 	firebase.put('/model','axisTen', axisTen)
 
 	#파베에 axislist 붙여나가기
-	path = '/model/axislist' + postId
-	axislist = firebase.get(path, None) + axisTen
-	firebase.put(path, axislist)
+	path_axis = '/model/axislist' + postId
+	axislist = firebase.get(path_axis, None) + axisTen
+	firebase.put(path_axis, axislist)
 
 
 #파베에서 mpu6050 값 읽어오기
