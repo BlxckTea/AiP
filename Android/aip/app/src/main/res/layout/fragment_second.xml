@@ -7,10 +7,244 @@
     android:background="#528823"
     android:id="@+id/linearRoot">
 
-    <EditText
-        android:id="@+id/et1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Second"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/titleGraph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="수면 그래프"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="0dp"
+            />
 
+        <com.github.mikephil.charting.charts.CombinedChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            />
+        <Button
+            android:id="@+id/btnGraph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="그래프 기록 보기"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/button_round_wh"
+            android:shadowRadius="1.5"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvGraph"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="필로우 버디를 처음 사용하시는군요,
+알람을 설정하고 수면을 기록해보세요!"
+            android:textSize="17dp"
+            android:gravity="center_vertical"
+            android:padding="40dp"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:background="#000000"
+            android:backgroundTintMode="screen"
+            android:backgroundTint="#cccccc"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/titleConsult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="수면 컨설팅"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="0dp"/>
+
+
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/chartConsult"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingRight="25dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/consultSleptText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수면 기간 : "
+                    android:textSize="14dp"/>
+                <TextView
+                    android:id="@+id/consultSleptValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/consultRatioText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REM수면 비율 : "
+                    android:textSize="14dp"/>
+                <TextView
+                    android:id="@+id/consultRatioValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+                <TextView
+                    android:id="@+id/consultScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수면점수 : "
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/consultScoreValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/consultTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="목표 취침 시간 : "
+                    android:textSize="17dp"
+                    android:textStyle="italic"/>
+                <TextView
+                    android:id="@+id/consultTimeAp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="오전 "
+                    android:textSize="17dp"
+                    android:textStyle="italic"/>
+                <TextView
+                    android:id="@+id/consultTimeHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시 "
+                    android:textSize="17dp"
+                    android:textStyle="italic"/>
+                <TextView
+                    android:id="@+id/consultTimeMinute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="분"
+                    android:textSize="17dp"
+                    android:textStyle="italic"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/consultCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="컨설팅 일차"
+                android:textStyle="italic"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvConsult"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="수면을 기록하면 측정 기록 확인 및 수면 컨설팅을 받아보실 수 있습니다."
+            android:textSize="17dp"
+            android:gravity="center_vertical"
+            android:padding="40dp"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:background="#000000"
+            android:backgroundTintMode="screen"
+            android:backgroundTint="#cccccc"
+            android:textStyle="italic"/>
+
+        <Button
+            android:id="@+id/btnFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="피드백 입력"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="0dp"
+            android:background="@drawable/button_round_wh"
+            android:shadowRadius="1.5"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:textSize="20dp"
+            android:enabled="false"/>
+        <Button
+            android:id="@+id/btnConsult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="목표 취침시간 설정"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="0dp"
+            android:background="@drawable/button_round_wh"
+            android:shadowRadius="1.5"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
+    </LinearLayout>
 </LinearLayout>

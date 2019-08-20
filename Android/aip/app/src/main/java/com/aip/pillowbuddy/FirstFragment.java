@@ -68,6 +68,7 @@ public class FirstFragment extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+
     }
 
     @Override
@@ -88,6 +89,7 @@ public class FirstFragment extends Fragment {
         final TextView tvMinute = (TextView) view.findViewById(R.id.tvMin);
         final TextView tvColon = (TextView) view.findViewById(R.id.tvColon);
         final Switch switchMeasure = (Switch) view.findViewById(R.id.switchMeasure);
+        final Switch switchDriveSleep = (Switch) view.findViewById(R.id.switchDriveSleep);
 
         //set resources
         linearLayoutBg.setBackgroundResource(bgIDs[bgMode]);
@@ -97,6 +99,7 @@ public class FirstFragment extends Fragment {
 
         //ACCESSIBILITY LABEL
         //set contentDescription
+        linearLayoutBg.setContentDescription("현재 화면은 '알람설정'입니다. '컨설팅결과 및 수면 그래프' 확인은 화면을 오른쪽으로 넘겨주세요.");
         if(myAlarm.isMeasureSwitch()) {
             linearTvs.setContentDescription(myAlarm.getAP() + " " + myAlarm.getHour() + "시" + myAlarm.getMinutes() + "분에 활성화 되어있습니다. 시간을 다시 설정하시려면 두번 터치하세요.");
         } else {
@@ -108,7 +111,7 @@ public class FirstFragment extends Fragment {
         Log.i("yeji", "6 onCreateView myAlarm's SwitchIsOn: "+myAlarm.isMeasureSwitch());
 
         //init widget
-        tpHour = myAlarm.getHour(); //TODO get the each value from DB
+        tpHour = myAlarm.getHour(); //get the each value from DB
         tpMinute = myAlarm.getMinutes();
         Log.d("yeji", "tpHour: "+tpHour);
         Log.d("yeji", "tpMinute: "+tpMinute);
@@ -208,6 +211,9 @@ public class FirstFragment extends Fragment {
 
                     myAlarm.setMeasureSwitch(true);
                     updateAlarm();
+                    switchDriveSleep.setEnabled(true);
+                    switchDriveSleep.setTextColor(Color.WHITE);
+                    mFirebaseDatabase.getReference().child("switch").child("sleepMusic").setValue("True");
 
                 } else if(b == false && !refreshOnce) {
                     tvFoot.setText("알람이 설정되어있지 않습니다.");
@@ -219,6 +225,27 @@ public class FirstFragment extends Fragment {
 
                     myAlarm.setMeasureSwitch(false);
                     updateAlarm();
+                    switchDriveSleep.setEnabled(false);
+                    switchDriveSleep.setTextColor(Color.GRAY);
+                    mFirebaseDatabase.getReference().child("switch").child("sleepMusic").setValue("False");
+                }
+            }
+        });
+
+        if(!switchMeasure.isChecked()) switchDriveSleep.setEnabled(false);
+        else switchDriveSleep.setEnabled(true);
+        switchDriveSleep.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b == true && !refreshOnce){
+                    switchDriveSleep.setTextColor(Color.WHITE);
+                    mFirebaseDatabase.getReference().child("switch").child("sleepMusic").setValue("True");
+                    Toast.makeText(getContext().getApplicationContext(), "수면 유도 음악이 설정되었습니다.", Toast.LENGTH_SHORT).show();
+
+                } else if(b == false && !refreshOnce) {
+                    switchDriveSleep.setTextColor(Color.GRAY);
+                    mFirebaseDatabase.getReference().child("switch").child("sleepMusic").setValue("False");
+                    Toast.makeText(getContext().getApplicationContext(), "알람이 해제되었습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -252,60 +279,51 @@ public class FirstFragment extends Fragment {
                 else {
                     Log.d("yeji", "initAlarm 알람있음: "+dataSnapshot.child("data").getChildrenCount());
 
-                    for(DataSnapshot s : dataSnapshot.getChildren()) {
+//                    for(DataSnapshot s : dataSnapshot.getChildren()) {
 //                        String key = s.getKey();
 //                        MyAlarm ma = s.getValue(MyAlarm.class); //Long Integer Object 변환 불가 error
-                        /*//test PASS
-                        Log.i("yeji", "initAlarm print key value: "+key);
-                        Log.i("yeji", "initAlarm print intHour: "+s.child("intHour").getValue());
-                        Log.i("yeji", "initAlarm print intMinute: "+s.child("intMinute").getValue());
-                        Log.i("yeji", "initAlarm print switchIsOn: "+s.child("switchIsOn").getValue());*/
-
-                        String strAP = (String) s.child("AP").getValue();
-                        String strHour = (String) s.child("hour").getValue();
-                        String strMinutes = (String) s.child("minutes").getValue();
-                        strHour = strHour.replace("시",""); //파베값 문자열에 시,분 붙어있어서 제거해줌
-                        strMinutes = strMinutes.replace("분","");
-
-                        myAlarm.setAP(strAP);
-                        myAlarm.setHour(Integer.parseInt(strHour));
-                        myAlarm.setMinutes(Integer.parseInt(strMinutes));
-
-
-                        String strSwitch = (String) dataSnapshot.child("switch").child("measureSwitch").getValue();
-                        boolean bSwitch; //파베 measureSwitch값이 문자열이라 boolean으로 변환
-                        if(strSwitch.equals("True")) bSwitch = true;
-                        else bSwitch = false;
-                        myAlarm.setMeasureSwitch(bSwitch);
-
-                        //View로 받아 스위치 체크해주기
-                        Switch switchMeasure = (Switch) viewInit.findViewById(R.id.switchMeasure);
-                        switchMeasure.setChecked(myAlarm.isMeasureSwitch());
-
-                        Log.i("yeji", "INIT BSWITCH IS: "+bSwitch);
-                        Log.i("yeji", "INIT SAFEMS IS: "+myAlarm.isSafeMs());
-                        Log.i("yeji", "INIT MEASURESWITCH IS: "+myAlarm.isMeasureSwitch());
-                        Log.i("yeji", "INIT SWITCHMS IS: "+ switchMeasure.isChecked());
-
                         //test PASS
-                        Log.i("yeji", "1 initAlarm myAlarm's IntHour: "+myAlarm.getHour());
-                        Log.i("yeji", "2 initAlarm myAlarm's IntMinute: "+myAlarm.getMinutes());
-                        Log.i("yeji", "3 initAlarm myAlarm's SwitchIsOn: "+myAlarm.isMeasureSwitch());
+//                        Log.i("yeji", "initAlarm print key value: "+key);
+//                        if(key == "data") {
+                            Log.i("yeji", "initAlarm print intHour: "+dataSnapshot.child("data/hour").getValue());
+                            Log.i("yeji", "initAlarm print intMinute: "+dataSnapshot.child("data/minute").getValue());
+                            Log.i("yeji", "initAlarm print switchIsOn: "+dataSnapshot.child("switch").child("switchIsOn").getValue());
 
-                        if(strHour != null) break;
-//                        if(iHour != null) break; //찾았으면 한번더돌아서 null찾지않도록 빠져나감
-                    }
+                            String strAP = (String) dataSnapshot.child("data/AP").getValue();
+                            String strHour = (String) dataSnapshot.child("data/hour").getValue();
+                            String strMinutes = (String) dataSnapshot.child("data/minutes").getValue();
+                            strHour = strHour.replace("시",""); //파베값 문자열에 시,분 붙어있어서 제거해줌
+                            strMinutes = strMinutes.replace("분","");
 
-//                    String strSwitch = (String) dataSnapshot.child("switch").child("measureSwitch").getValue();
-//                    boolean bSwitch; //파베 measureSwitch값이 문자열이라 boolean으로 변환
-//                    if(strSwitch.equals("True")) bSwitch = true;
-//                    else bSwitch = false;
-//                    myAlarm.setMeasureSwitch(bSwitch);
-//                    Log.i("yeji", "INIT BSWITCH IS: "+bSwitch);
-//                    Log.i("yeji", "INIT SAFEMS IS: "+myAlarm.isSafeMs());
-//                    Log.i("yeji", "INIT MEASURESWITCH IS: "+myAlarm.isMeasureSwitch());
+                            myAlarm.setAP(strAP);
+                            myAlarm.setHour(Integer.parseInt(strHour));
+                            myAlarm.setMinutes(Integer.parseInt(strMinutes));
+
+                            String strSwitch = (String) dataSnapshot.child("switch").child("measureSwitch").getValue();
+                            boolean bSwitch; //파베 measureSwitch값이 문자열이라 boolean으로 변환
+                            if(strSwitch.equals("True")) bSwitch = true;
+                            else bSwitch = false;
+                            myAlarm.setMeasureSwitch(bSwitch);
+
+                            //View로 받아 스위치 체크해주기
+                            Switch switchMeasure = (Switch) viewInit.findViewById(R.id.switchMeasure);
+                            switchMeasure.setChecked(myAlarm.isMeasureSwitch());
+
+                            Log.i("yeji", "INIT BSWITCH IS: "+bSwitch);
+                            Log.i("yeji", "INIT SAFEMS IS: "+myAlarm.isSafeMs());
+                            Log.i("yeji", "INIT MEASURESWITCH IS: "+myAlarm.isMeasureSwitch());
+                            Log.i("yeji", "INIT SWITCHMS IS: "+ switchMeasure.isChecked());
+
+                            //test PASS
+                            Log.i("yeji", "1 initAlarm myAlarm's IntHour: "+myAlarm.getHour());
+                            Log.i("yeji", "2 initAlarm myAlarm's IntMinute: "+myAlarm.getMinutes());
+                            Log.i("yeji", "3 initAlarm myAlarm's SwitchIsOn: "+myAlarm.isMeasureSwitch());
+
+//                            if(strHour != null) break; //찾았으면 한번더돌아서 null찾지않도록 빠져나감
+//                        }
+//                    }
+
                 }
-
                 //fragment refresh
                 if(refreshOnce) refresh();
             }

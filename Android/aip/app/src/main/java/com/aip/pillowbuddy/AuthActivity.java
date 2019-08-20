@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,13 @@ public class AuthActivity extends AppCompatActivity
         mSigninBtn = (SignInButton) findViewById(R.id.signInBtn);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
+        LinearLayout linearAuth = (LinearLayout) findViewById(R.id.linearAuth);
         TextView textView = (TextView) mSigninBtn.getChildAt(0);
         textView.setText("Google Assistant 계정과 \n동일한 계정으로 로그인해주세요.");
+
+        //ACCESSIBILITY LABEL
+        //set contentDescription
+        linearAuth.setContentDescription("현재 화면은 '로그인 화면'입니다. '로그인 버튼'은 가장 아래쪽에 있습니다.");
 
         // Configure Google Sign In
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

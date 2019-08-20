@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         else if(currentHour >= 17 && currentHour <= 19) bgMode = TIME_EVENING;
         else if((currentHour >= 20 && currentHour <= 24)
                 || (currentHour >= 0 && currentHour <= 5)) bgMode = TIME_NIGHT;
-//        bgMode = TIME_EVENING; //test //change bgMode
+//        bgMode = TIME_AFTERNOON; //test //change bgMode
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
