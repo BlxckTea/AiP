@@ -172,7 +172,7 @@ def feeedbackSwitchOnce():
 
 
 while True:
-   global feedbackMode
+   feedbackMode
 
    if firebase.get('/switch/measureSwitch', None) == "True":
       if postingMode == True:
