@@ -63,6 +63,9 @@ public class SecondFragment extends Fragment {
 
     static ArrayList<BarEntry> consultBarEntries;
 //    static ArrayList<String> consultBarEntryLabels;
+
+    static ArrayList<String> descGraph = new ArrayList<>();
+
     BarDataSet consultBarDataset;
     BarData consultBarData;
 
@@ -184,6 +187,8 @@ public class SecondFragment extends Fragment {
             cWeekCount.setTextColor(Color.BLACK);
             btnFeedback.setTextColor(Color.BLACK);
             btnFeedback.setBackgroundResource(R.drawable.button_round_bk);
+            btnFeedback.setEnabled(true);
+            btnFeedback.setVisibility(View.VISIBLE);
             btnConsult.setTextColor(Color.BLACK);
             btnConsult.setBackgroundResource(R.drawable.button_round_bk);
             legend1.setTextColor(Color.BLACK);
@@ -210,6 +215,8 @@ public class SecondFragment extends Fragment {
             cWeekCount.setTextColor(Color.WHITE);
             btnFeedback.setTextColor(Color.WHITE);
             btnFeedback.setBackgroundResource(R.drawable.button_round_wh);
+            btnFeedback.setEnabled(false);
+            btnFeedback.setVisibility(View.INVISIBLE);
             btnConsult.setTextColor(Color.WHITE);
             btnConsult.setBackgroundResource(R.drawable.button_round_wh);
             legend1.setTextColor(Color.WHITE);
@@ -247,6 +254,11 @@ public class SecondFragment extends Fragment {
         });
         chart.getDescription().setText("");
         chartConsult.getDescription().setText("숫자 * 5분 = 실제시간");
+
+        //setContentDescription
+        if(!descGraph.isEmpty()){
+            chart.setContentDescription("수면 그래프 입니다." + descGraph + "순서로 수면단계가 진행되었습니다.");
+        }
 
         final String[] states, times;
         states = new String[]{"", "DEEP", "LIGHT", "REM", "AWAKE", ""};
@@ -602,6 +614,8 @@ public class SecondFragment extends Fragment {
 
 
                     int i=0, stVal=4, rem = 0, nrem = 0;
+                    String descGraphBefore = "DEEP";
+                    if(!descGraph.isEmpty()) for (String s : descGraph) descGraph.remove(s);//init ArrayList
                     for (DataSnapshot s : dataSnapshot.child("model/posts/"+lastday.toString()).getChildren()) {
                         String key = (String) s.getKey();
                         String ax = (String) s.child("axisten/").getValue();
@@ -614,6 +628,10 @@ public class SecondFragment extends Fragment {
                         else if(st.equals("LIGHT")) {stVal = 2; rem++;}
                         else if(st.equals("REM")) {stVal = 3; rem++;}
                         else stVal = 4; //state없는 처음 3번은 AWAKE로 출력
+
+                        if(!st.equals(descGraphBefore) && !st.equals("")) descGraph.add(st);
+                        if(!st.equals(""))descGraphBefore = st;
+                        Log.d("posts", "desc : "+descGraphBefore + "state: "+st);
 
                         if(i == 0) {
                             consultBarEntries.add(new BarEntry(3f, timeLength));
@@ -657,7 +675,11 @@ public class SecondFragment extends Fragment {
 
                         if(fSwitch.equals("True")) {
                             btnFeedback.setEnabled(true);
-                        } else btnFeedback.setEnabled(false);
+                            btnFeedback.setVisibility(View.VISIBLE);
+                        } else {
+                            btnFeedback.setEnabled(false);
+                            btnFeedback.setVisibility(View.INVISIBLE);
+                        }
 
                         cTimeAp.setText(tpAp+" ");
                         cTimeHour.setText(tpHour+"시 ");

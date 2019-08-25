@@ -13,12 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="bottom"
-            android:paddingBottom="50dp">
+            android:paddingBottom="10dp">
             <LinearLayout
                 android:id="@+id/linearTvs"
                 android:layout_width="wrap_content"
@@ -59,21 +60,48 @@
                     android:paddingRight="25dp"/>
             </LinearLayout>
 
-            <Switch
-                android:id="@+id/switchMeasure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"/>
+
         </LinearLayout>
 
     </LinearLayout>
+
+    <Switch
+        android:id="@+id/switchMeasure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="25sp"
+        android:layout_gravity="center|center_vertical"
+        android:textOn="ON"
+        android:textOff="OFF"
+        android:showText="true"
+        android:textColor="@android:color/white"
+        android:track="@drawable/switch_track"
+        android:thumb="@drawable/switch_thumb"
+        android:text="알람 설정 "
+        android:checked="true"/>
+
     <Switch
         android:id="@+id/switchDriveSleep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="수면유도 기능"
-        android:layout_gravity="center"
-        android:textSize="20dp"/>
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="25sp"
+        android:layout_gravity="center|center_vertical"
+        android:textOn="ON"
+        android:textOff="OFF"
+        android:showText="true"
+        android:textColor="@android:color/white"
+        android:track="@drawable/switch_track"
+        android:thumb="@drawable/switch_thumb"
+        android:text="수면 유도 "
+        android:checked="true"/>
 
 
     <LinearLayout

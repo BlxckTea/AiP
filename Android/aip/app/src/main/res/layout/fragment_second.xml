@@ -31,7 +31,7 @@
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
@@ -52,7 +52,7 @@
             android:id="@+id/tvGraph"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:text="필로우 버디를 처음 사용하시는군요,
 알람을 설정하고 수면을 기록해보세요!"
             android:textSize="17dp"
@@ -96,8 +96,8 @@
             android:layout_height="0dp"
             android:layout_weight="0.7"
             android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
             android:paddingTop="10dp">
 
             <LinearLayout
@@ -109,12 +109,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="수면 기간 : "
-                    android:textSize="14dp"/>
+                    android:textSize="17sp"/>
                 <TextView
                     android:id="@+id/consultSleptValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"/>
+                    android:textSize="17sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -125,12 +125,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="REM수면 비율 : "
-                    android:textSize="14dp"/>
+                    android:textSize="17sp"/>
                 <TextView
                     android:id="@+id/consultRatioValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"/>
+                    android:textSize="17sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -144,8 +144,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="수면점수 : "
-                    android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:paddingBottom="20sp"/>
                 <TextView
                     android:id="@+id/consultScoreValue"
                     android:layout_width="wrap_content"

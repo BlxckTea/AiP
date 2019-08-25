@@ -96,15 +96,21 @@ public class FirstFragment extends Fragment {
         linearLayoutFoot.setBackgroundResource(footIDs[bgMode]);
         ivSky.setImageResource(skyIDs[bgMode]);
         ivMountain.setImageResource(mtIDs[bgMode]);
+        switchMeasure.setTextColor(Color.WHITE);
+        switchDriveSleep.setTextColor(Color.WHITE);
 
         //ACCESSIBILITY LABEL
         //set contentDescription
-        linearLayoutBg.setContentDescription("현재 화면은 '알람설정'입니다. '컨설팅결과 및 수면 그래프' 확인은 화면을 오른쪽으로 넘겨주세요.");
+        linearLayoutBg.setContentDescription("현재 화면은 '알람설정' 및 '수면유도 기능'을 사용할 수 있습니다. '컨설팅결과 및 수면 그래프' 확인은 화면을 오른쪽으로 넘겨주세요.");
         if(myAlarm.isMeasureSwitch()) {
             linearTvs.setContentDescription(myAlarm.getAP() + " " + myAlarm.getHour() + "시" + myAlarm.getMinutes() + "분에 활성화 되어있습니다. 시간을 다시 설정하시려면 두번 터치하세요.");
         } else {
             linearTvs.setContentDescription(myAlarm.getAP() + " " + myAlarm.getHour() + "시" + myAlarm.getMinutes() + "분에 비활성화 되어있습니다. 알람을 설정하시려면 오른쪽의 스위치를 활성화하세요.");
         }
+        linearTvs.setContentDescription("설정된 알람 시각은" + myAlarm.getAP()+myAlarm.getHour()+"시"+myAlarm.getMinutes()+"분 입니다. 재설정 하시겠습니까?");
+        switchMeasure.setContentDescription("알람설정 스위치 입니다.");
+        switchDriveSleep.setContentDescription("수면유도기능 스위치 입니다.");
+
 
         Log.i("yeji", "4 onCreateView myAlarm's IntHour: "+myAlarm.getHour());
         Log.i("yeji", "5 onCreateView myAlarm's IntMinute: "+myAlarm.getMinutes());
@@ -131,12 +137,14 @@ public class FirstFragment extends Fragment {
             tvHour.setTextColor(Color.WHITE);
             tvMinute.setTextColor(Color.WHITE);
             tvColon.setTextColor(Color.WHITE);
+            switchDriveSleep.setVisibility(View.VISIBLE);
         } else if (!switchMeasure.isChecked() && !refreshOnce) {
             tvFoot.setText("알람이 설정되어있지 않습니다.");
             tvAmpm.setTextColor(Color.GRAY);
             tvHour.setTextColor(Color.GRAY);
             tvMinute.setTextColor(Color.GRAY);
             tvColon.setTextColor(Color.GRAY);
+            switchDriveSleep.setVisibility(View.INVISIBLE);
         }
 
         //open dialog
@@ -169,6 +177,7 @@ public class FirstFragment extends Fragment {
                         tvHour.setText(myAlarm.getHour()<10? "0"+myAlarm.getHour().toString(): myAlarm.getHour().toString());
                         tvMinute.setText(myAlarm.getMinutes()<10? "0"+myAlarm.getMinutes().toString(): myAlarm.getMinutes().toString());
                         switchMeasure.setChecked(myAlarm.isMeasureSwitch());
+                        switchDriveSleep.setVisibility(View.VISIBLE);
                         tvAmpm.setTextColor(Color.WHITE);
                         tvHour.setTextColor(Color.WHITE);
                         tvMinute.setTextColor(Color.WHITE);
@@ -213,6 +222,7 @@ public class FirstFragment extends Fragment {
                     updateAlarm();
                     switchDriveSleep.setEnabled(true);
                     switchDriveSleep.setTextColor(Color.WHITE);
+                    switchDriveSleep.setVisibility(View.VISIBLE);
                     mFirebaseDatabase.getReference().child("switch").child("sleepMusic").setValue("True");
 
                 } else if(b == false && !refreshOnce) {
@@ -227,6 +237,7 @@ public class FirstFragment extends Fragment {
                     updateAlarm();
                     switchDriveSleep.setEnabled(false);
                     switchDriveSleep.setTextColor(Color.GRAY);
+                    switchDriveSleep.setVisibility(View.INVISIBLE);
                     mFirebaseDatabase.getReference().child("switch").child("sleepMusic").setValue("False");
                 }
             }

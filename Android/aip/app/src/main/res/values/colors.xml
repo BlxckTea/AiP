@@ -11,4 +11,13 @@
     <color name="colorEvening">#3f3e66</color>
     <color name="colorNight">#7b7091</color>
 
+
+    <color name="switchTrack">#64b5f6</color>
+    <color name="switchTrackDisable">#1565c0</color>
+    <color name="switchTrackActive">#1b5e20</color>
+    <color name="switchTrackNormal">#90caf9</color>
+    <color name="switchThumbBgActive">#ad1457</color>
+    <color name="switchThumbActive">#D81B60</color>
+    <color name="switchThumbkNormal">#90caf9</color>
+
 </resources>
